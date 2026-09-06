@@ -1,110 +1,71 @@
 # ishaanhanda.com
 
-Personal site — single-page, no framework, no build step. Just `index.html`, `styles.css`, `main.js`.
+My personal site. Single page, no framework, no build step — just `index.html`,
+`styles.css`, and `main.js`.
 
-## Run locally
+## Running it locally
 
-Open `index.html` in a browser, or serve it:
+I open `index.html` straight in a browser, or serve it when I need real paths:
 
 ```bash
 python3 -m http.server 8000
 # → http://localhost:8000
 ```
 
-## Deploy
+## Deploying
 
-**Vercel** (you've used it before, on Chainge):
-```bash
-npx vercel --prod
-```
-
-**GitHub Pages:** push to a repo, then Settings → Pages → deploy from `main` / root.
-
-**Netlify:** drag this folder onto app.netlify.com/drop.
-
-Custom domain: buy `ishaanhanda.com`, point it in your host's domain settings. The
-`og:url` / `canonical` tags in `index.html` already assume that domain — update them
-if you use a different one.
-
----
-
-## ⚠️ Fill these in
-
-Everything below is either a placeholder or an educated guess. Search `data-todo`
-in `index.html` to jump to each one.
-
-### 1. GitHub username
-Currently guessed as `github.com/ishaanhanda` in four places. Fix with:
+The site is on Netlify, connected to this repo. Any push to `main` deploys
+automatically:
 
 ```bash
-# from this folder — replace YOURNAME
-sed -i '' 's|github.com/ishaanhanda|github.com/YOURNAME|g' index.html
+git add -A
+git commit -m "what changed"
+git push
 ```
-Also update the `sameAs` field in the JSON-LD block at the top of `index.html`.
 
-### 2. Project links (`data-todo="link"`)
-Each project card has GitHub / live-demo icon links pointing at `#` or a guessed
-GitHub URL. Real repo + demo URLs needed for:
-- BriefCase
-- Movie Search
-- Chainge STL (live site URL)
-- Linux Shell
+`netlify.toml` handles the config — it publishes the repo root with no build
+command, so there's nothing to set up in the Netlify UI.
 
-Delete any `<a>` you don't have a link for — an icon that goes nowhere is worse than
-no icon.
+The `canonical` and `og:url` tags in `index.html` both point at
+`https://ishaanhanda.com/`. If I ever move the site off that domain, those need
+updating too.
 
-### 3. Movie Search (`data-todo="movie-search"`)
-**Written from your one-line description — the details are invented.** Needs real
-content: what stack, what API (TMDB? OMDb?), what was actually hard about it, and
-any numbers. Replace the `.proj-desc` paragraph and the `.chips` list.
+## Still to do
 
-### 4. 1904labs (`data-todo="1904labs"`)
-Partly reconstructed. Confirmed from public search: multiple internship terms, and
-work on **data engineering and decision science** initiatives. Still needs:
-- Exact job title(s)
-- Real start/end dates (currently the vague "Multiple terms")
-- Actual accomplishments with metrics, in the style of your other bullets
+The **1904labs** entry in the timeline is marked `data-todo="1904labs"` in
+`index.html`. The role and location are right, but it still needs:
 
-### 5. LinkedIn extras
-LinkedIn blocks automated fetching (HTTP 999 for any non-logged-in request), so
-your profile couldn't be read directly. Paste the profile text and these get filled in.
-
-Already pulled from public search results and added to the site:
-- Sandia work was via **Purdue's The Data Mine** (the résumé didn't say) — and the tool
-  predicts *where a flight will land* from a partial trajectory, using ML over a grid
-  of historical flight data
-- **1st place, JUNI Hackathon (Stanford)** — now in the Recognition block
-
-Not added, because it looked like a different person with the same name in the search
-index: a mention of "leaving Stanford and Purdue to build Phyvant full-time in San
-Francisco." Confirm before it goes anywhere near the site.
-
-Still likely on your LinkedIn and missing here: coursework detail, clubs/orgs,
-volunteering, certifications, other hackathons, and any recommendations worth
-pulling a pull-quote from.
-
----
+- Real start and end dates — it currently just says "Multiple terms"
+- Accomplishments with actual numbers, matching the style of my other bullets
 
 ## Structure
 
 ```
-index.html   markup + content (all copy lives here)
-styles.css   design tokens at :root, dark + light themes
-main.js      theme toggle, mobile menu, scroll spy, reveal animations, count-up
-assets/      résumé PDF
+index.html           markup + content — all the copy lives here
+styles.css           design tokens at :root, dark + light themes
+main.js              theme toggle, mobile menu, scroll spy, reveal animations, count-up
+netlify.toml         deploy config — publish root, no build
+assets/              résumé PDF + headshot
+variants/            an alternate "editorial" design I tried
+research/            design reference notes
+index.preview.html   an earlier draft of the layout
 ```
 
-### Editing notes
+`variants/`, `research/`, and `index.preview.html` are scratch work, but they do
+get deployed with everything else — so `ishaanhanda.com/variants/editorial.html`
+is publicly reachable. Worth deleting if I ever want them out of sight.
+
+## Editing notes
 
 - **Colors** — all in `:root` / `[data-theme="light"]` at the top of `styles.css`.
-  Change `--accent`, `--accent-2`, and `--grad` to re-skin the whole site.
+  Changing `--accent`, `--accent-2`, and `--grad` re-skins the whole site.
 - **Adding a job** — copy an `<li class="tl-item reveal">` block in the timeline.
   Order is reverse-chronological.
-- **Adding a project** — copy an `<article class="proj reveal">`. Add
-  `proj-feature` to the class list to make it span two columns.
+- **Adding a project** — copy an `<article class="proj reveal">`. Adding
+  `proj-feature` to the class list makes it span two columns.
 - **Stat count-up** — `data-count` is the number, `data-suffix` the unit.
 
-### What's built in
+## What's built in
 
 Responsive down to 360px · dark/light with system detection and localStorage ·
 keyboard accessible with skip link and focus rings · `prefers-reduced-motion`
