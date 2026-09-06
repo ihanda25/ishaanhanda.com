@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ishaan Handa</title>
+<meta name="description" content="Ishaan Handa — Purdue CS (ML & SWE). Recently AI/ML Platform Engineering Intern at Walt Disney Animation Studios." />
+<meta name="theme-color" content="#f4f1ea" />
+<style>
+:root {
+  --bg: #f4f1ea;
+  --ink: #1a1814;
+  --muted: #5c574e;
+  --line: #d9d2c5;
+  --accent: #8b3a2a;
+  --surface: #ebe6db;
+  --panel: #fffdf8;
+  --serif: "Iowan Old Style", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12100e; --ink: #ece7dc; --muted: #a39b8c; --line: #2e2a24;
+    --accent: #d4785c; --surface: #1c1915; --panel: #18150f;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--serif); font-size: 1.0625rem; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-underline-offset: 0.18em; }
+a:hover { color: var(--accent); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 99; background: var(--bg); padding: .5rem 1rem; }
+.wrap { width: min(100% - 2.5rem, 52rem); margin-inline: auto; }
+
+/* nav */
+.top {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s var(--ease), padding .25s var(--ease);
+}
+.top.scrolled { border-bottom-color: var(--line); }
+.top-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1rem 0; font-family: var(--sans); font-size: 0.875rem;
+}
+.top.scrolled .top-inner { padding: 0.65rem 0; }
+.name { font-weight: 600; text-decoration: none; letter-spacing: -0.02em; }
+.nav-links { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--muted); }
+.nav-links a { text-decoration: none; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.menu-btn {
+  display: none; background: none; border: 1px solid var(--line);
+  font-family: var(--mono); font-size: 0.75rem; padding: 0.4rem 0.6rem;
+  color: var(--ink); cursor: pointer;
+}
+@media (max-width: 720px) {
+  .menu-btn { display: inline-block; }
+  .nav-links {
+    display: none; position: absolute; right: 1.25rem; top: 100%;
+    flex-direction: column; gap: 0; background: var(--panel);
+    border: 1px solid var(--line); padding: 0.5rem 0; min-width: 10rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.65rem 1rem; }
+}
+
+/* hero */
+.hero { padding: 3.5rem 0 2.75rem; border-bottom: 1px solid var(--line); }
+.eyebrow {
+  font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 1.1rem;
+}
+h1 {
+  font-weight: 500; font-size: clamp(1.9rem, 5vw, 2.6rem);
+  line-height: 1.15; letter-spacing: -0.03em; margin: 0 0 1.1rem; max-width: 18ch;
+}
+h1 em { font-style: italic; color: var(--accent); }
+.lede { max-width: 40rem; color: var(--muted); margin: 0 0 1.5rem; font-size: 1.1rem; }
+.lede strong { color: var(--ink); }
+.cta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.15rem; font-family: var(--sans); font-size: 0.9rem; }
+.cta a.primary {
+  background: var(--ink); color: var(--bg); text-decoration: none;
+  padding: 0.55rem 0.95rem;
+}
+.cta a.primary:hover { background: var(--accent); color: #fff; }
+.cta a.ghost { color: var(--muted); }
+.now {
+  margin-top: 2rem; padding: 1rem 1.1rem; background: var(--surface);
+  border-left: 3px solid var(--accent); max-width: 40rem;
+}
+.now .label { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin: 0 0 0.3rem; }
+.now p { margin: 0; font-size: 0.98rem; }
+
+section { padding: 2.75rem 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: 0; }
+h2 {
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+
+/* about + photo */
+.about-grid {
+  display: grid; gap: 2rem; align-items: start;
+}
+@media (min-width: 800px) {
+  .about-grid { grid-template-columns: 1fr 220px; gap: 2.5rem; }
+}
+.prose p { margin: 0 0 1rem; }
+.facts { list-style: none; padding: 0; margin: 1.25rem 0 0; font-family: var(--sans); font-size: 0.9rem; }
+.facts li {
+  display: grid; grid-template-columns: 6rem 1fr; gap: 0.75rem;
+  padding: 0.5rem 0; border-top: 1px solid var(--line);
+}
+.facts li:last-child { border-bottom: 1px solid var(--line); }
+.facts span { color: var(--muted); }
+.photo-wrap {
+  position: relative; width: min(100%, 220px); margin-inline: auto;
+  aspect-ratio: 1; justify-self: end;
+}
+.photo-wrap::before {
+  content: ""; position: absolute; inset: 12px -12px -12px 12px;
+  border: 2px solid var(--accent); z-index: 0;
+  transition: transform .25s var(--ease);
+}
+.photo-wrap:hover::before { transform: translate(-4px, -4px); }
+.photo-wrap img {
+  position: relative; z-index: 1; width: 100%; height: 100%;
+  object-fit: cover; display: block; filter: grayscale(18%);
+  transition: filter .25s var(--ease);
+}
+.photo-wrap:hover img { filter: grayscale(0%); }
+
+/* jobs tabs — Vinay/Brittany-style collapse */
+.jobs {
+  display: grid; gap: 1.25rem;
+}
+@media (min-width: 720px) {
+  .jobs { grid-template-columns: 11rem 1fr; gap: 1.75rem; min-height: 18rem; }
+}
+.job-tabs {
+  display: flex; gap: 0; overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--sans); font-size: 0.82rem;
+  -webkit-overflow-scrolling: touch;
+}
+@media (min-width: 720px) {
+  .job-tabs {
+    flex-direction: column; border-bottom: 0; border-left: 2px solid var(--line);
+    overflow: visible;
+  }
+}
+.job-tab {
+  appearance: none; background: transparent; border: 0; cursor: pointer;
+  color: var(--muted); text-align: left; white-space: nowrap;
+  padding: 0.7rem 1rem; font: inherit; position: relative;
+  border-bottom: 2px solid transparent; transition: color .2s var(--ease), background .2s var(--ease);
+}
+@media (min-width: 720px) {
+  .job-tab {
+    border-bottom: 0; border-left: 2px solid transparent;
+    margin-left: -2px; width: calc(100% + 2px);
+  }
+}
+.job-tab:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.job-tab[aria-selected="true"] {
+  color: var(--accent); border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.job-panels { position: relative; }
+.job-panel { display: none; animation: fadeIn .28s var(--ease); }
+.job-panel.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .job-panel { animation: none; }
+  html { scroll-behavior: auto; }
+}
+.job-panel h3 {
+  font-family: var(--sans); font-size: 1.05rem; font-weight: 600;
+  margin: 0 0 0.25rem; letter-spacing: -0.01em;
+}
+.job-panel .meta {
+  font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin: 0 0 0.9rem;
+}
+.job-panel ul { margin: 0; padding-left: 1.15rem; }
+.job-panel li { margin: 0.4rem 0; }
+.job-panel li::marker { color: var(--accent); }
+.chips {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none;
+  padding: 0; margin: 1rem 0 0; font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+}
+.chips li {
+  margin: 0; padding: 0.2rem 0.45rem; border: 1px solid var(--line); background: var(--surface);
+}
+.chips li::marker { content: none; }
+
+/* project accordion */
+.acc { border-top: 1px solid var(--line); }
+.acc-item { border-bottom: 1px solid var(--line); }
+.acc-btn {
+  width: 100%; appearance: none; background: transparent; border: 0;
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: baseline;
+  text-align: left; padding: 1rem 0; cursor: pointer; color: inherit; font: inherit;
+}
+.acc-btn:hover h3 { color: var(--accent); }
+.acc-btn h3 {
+  font-family: var(--sans); font-size: 1.05rem; font-weight: 600;
+  margin: 0; letter-spacing: -0.02em;
+}
+.acc-btn .badge {
+  font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-left: 0.4rem;
+}
+.acc-btn .chev {
+  font-family: var(--mono); font-size: 0.85rem; color: var(--muted);
+  transition: transform .25s var(--ease);
+}
+.acc-btn[aria-expanded="true"] .chev { transform: rotate(90deg); color: var(--accent); }
+.acc-panel {
+  display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s var(--ease);
+}
+.acc-panel.open { grid-template-rows: 1fr; }
+.acc-panel > div { overflow: hidden; }
+.acc-body { padding: 0 0 1.15rem; color: var(--muted); max-width: 40rem; }
+.acc-body strong { color: var(--ink); }
+.acc-item.featured .acc-btn { background: color-mix(in srgb, var(--surface) 80%, transparent); padding-inline: 0.85rem; margin-inline: -0.85rem; width: calc(100% + 1.7rem); border-left: 3px solid var(--accent); }
+
+.skills { display: grid; gap: 0.85rem; font-family: var(--sans); font-size: 0.92rem; }
+@media (min-width: 640px) { .skills { grid-template-columns: 7.5rem 1fr; } }
+.skills dt { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.skills dd { margin: 0; }
+
+footer { padding: 2.25rem 0 3rem; font-family: var(--sans); font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="topbar">
+  <div class="wrap top-inner">
+    <a class="name" href="#top">Ishaan Handa</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<section class="hero wrap">
+  <p class="eyebrow">Purdue CS · ML &amp; Software Engineering · Dec 2026</p>
+  <h1>I build <em>agentic systems</em> and the platforms underneath them.</h1>
+  <p class="lede">
+    New-grad software / ML engineer. Recently an AI/ML Platform Engineering Intern at
+    <strong>Walt Disney Animation Studios</strong> — agentic LLM pipelines, evaluation,
+    and production recovery. Previously Centene, founding CTO at Chainge STL, and research with Sandia via Purdue’s Data Mine.
+  </p>
+  <div class="cta">
+    <a class="primary" href="mailto:ishaanhanda25@gmail.com">Email</a>
+    <a class="ghost" href="https://linkedin.com/in/ishaan-handa" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="ghost" href="https://github.com/ihanda25" target="_blank" rel="noopener">GitHub</a>
+    <a class="ghost" href="assets/Ishaan-Handa-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+  </div>
+  <div class="now">
+    <p class="label">Now · Sep 2026</p>
+    <p>Graduating December 2026. Open to new-grad SWE / ML / AI engineering roles in the US — especially entertainment and large-scale consumer platform teams.</p>
+  </div>
+</section>
+
+<section id="about" class="wrap">
+  <h2>About</h2>
+  <div class="about-grid">
+    <div class="prose">
+      <p>
+        I care about the boring parts that make models usable: tool interfaces, eval suites,
+        failure recovery, and latency under load. At Disney Animation I shipped an agentic
+        provisioning system that cut turnaround from over a day to minutes — with MCP tools,
+        precision/recall measurement, and a retry path that didn’t need on-call babysitting.
+      </p>
+      <p>
+        Outside internships I’ve founded a small product (Chainge STL), fine-tuned legal NLP models
+        on-prem with vLLM, and I’m building semantic retrieval demos over <strong>public TMDB metadata</strong>
+        (Disney-family titles appear there as open catalog data) — with a measured plan for cross-encoder reranking
+        and corpus enrichment.
+      </p>
+      <ul class="facts">
+        <li><span>School</span> Purdue University · B.S. CS (ML + SWE) · Minors Math, Entrepreneurship</li>
+        <li><span>Focus</span> Agentic LLMs · MCP · Eval harnesses · Cloud backends</li>
+        <li><span>Based</span> St. Louis / West Lafayette · open to US relocation</li>
+      </ul>
+    </div>
+    <div class="photo-wrap">
+      <img src="assets/headshot.jpeg" alt="Headshot of Ishaan Handa" width="440" height="440" />
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="wrap">
+  <h2>Experience</h2>
+  <div class="jobs">
+    <div class="job-tabs" role="tablist" aria-label="Workplaces">
+      <button class="job-tab" role="tab" id="tab-disney" aria-selected="true" aria-controls="panel-disney" data-panel="panel-disney">Disney Animation</button>
+      <button class="job-tab" role="tab" id="tab-centene" aria-selected="false" aria-controls="panel-centene" data-panel="panel-centene">Centene</button>
+      <button class="job-tab" role="tab" id="tab-chainge" aria-selected="false" aria-controls="panel-chainge" data-panel="panel-chainge">Chainge STL</button>
+      <button class="job-tab" role="tab" id="tab-1904" aria-selected="false" aria-controls="panel-1904" data-panel="panel-1904">1904labs</button>
+      <button class="job-tab" role="tab" id="tab-knowink" aria-selected="false" aria-controls="panel-knowink" data-panel="panel-knowink">KNOWiNK</button>
+      <button class="job-tab" role="tab" id="tab-sandia" aria-selected="false" aria-controls="panel-sandia" data-panel="panel-sandia">Sandia</button>
+    </div>
+    <div class="job-panels">
+      <div class="job-panel active" role="tabpanel" id="panel-disney" aria-labelledby="tab-disney">
+        <h3>AI/ML Platform Engineering Intern</h3>
+        <p class="meta">Walt Disney Animation Studios · May – Aug 2026 · Burbank, CA</p>
+        <ul>
+          <li>Built an agentic LLM system (Python, PydanticAI) that cut security credential provisioning from &gt;24h to &lt;5 min — Jira → structured fields → YAML/CI tool-calling.</li>
+          <li>Shipped independent MCP servers over streamable HTTP; added a precision/recall eval suite for triage quality.</li>
+          <li>Fault-tolerant recovery: semantic CI diagnosis + SQLite retry state machine, git rollbacks, up to 3× auto-retry, zero manual on-call on permanent failure.</li>
+          <li>Deployed on Kubernetes with 20 parallel LLM workers; eliminated 504s under production load.</li>
+        </ul>
+        <ul class="chips"><li>Python</li><li>PydanticAI</li><li>MCP</li><li>Kubernetes</li><li>GitLab CI</li></ul>
+      </div>
+      <div class="job-panel" role="tabpanel" id="panel-centene" aria-labelledby="tab-centene" hidden>
+        <h3>AI and Application Development Intern</h3>
+        <p class="meta">Centene Corporation · May – Aug 2025 · St. Louis, MO</p>
+        <ul>
+          <li>Built iBills — Bedrock LLM billing reconciliation turning fragmented data into structured insights.</li>
+          <li>Lambda / DynamoDB / Textract pipelines with ~5× processing accuracy improvement; Java/Python event-driven services on AWS.</li>
+          <li>1 of 6 Peer Leaders among 170+ interns; presented to executive IT leadership.</li>
+        </ul>
+        <ul class="chips"><li>AWS Bedrock</li><li>Lambda</li><li>DynamoDB</li><li>Java</li><li>Python</li></ul>
+      </div>
+      <div class="job-panel" role="tabpanel" id="panel-chainge" aria-labelledby="tab-chainge" hidden>
+        <h3>CTO &amp; Founding Engineer</h3>
+        <p class="meta">Chainge STL · Mar 2025 – Jan 2026 · St. Louis, MO</p>
+        <ul>
+          <li>Founded and shipped a civic engagement platform (React, Node, Express, Gemini summaries on Vercel); recruited and led 4 engineers.</li>
+        </ul>
+        <ul class="chips"><li>React</li><li>Node</li><li>Express</li><li>Gemini</li><li>Vercel</li></ul>
+      </div>
+      <div class="job-panel" role="tabpanel" id="panel-1904" aria-labelledby="tab-1904" hidden>
+        <h3>Data Science &amp; Machine Learning Intern</h3>
+        <p class="meta">1904labs · Multiple summers · St. Louis, MO</p>
+        <ul>
+          <li>Amazon Ring engagement: generated utterances to test a telephone bot; AWS SQL over S3 JSON; QuickSight KPI dashboards.</li>
+          <li>Special project: tooling to automate Deterministic Agile tracking and forecasting for client delivery.</li>
+        </ul>
+        <ul class="chips"><li>Python</li><li>SQL</li><li>AWS</li><li>QuickSight</li></ul>
+      </div>
+      <div class="job-panel" role="tabpanel" id="panel-knowink" aria-labelledby="tab-knowink" hidden>
+        <h3>Data Science Intern</h3>
+        <p class="meta">KNOWiNK · May – Aug 2024 · St. Louis, MO</p>
+        <ul>
+          <li>Python/SQL pipelines for real-time election data — ~70% faster/more reliable ingestion.</li>
+          <li>QuickSight + Redshift: ~30% runtime reduction on KPI reporting.</li>
+        </ul>
+        <ul class="chips"><li>Python</li><li>SQL</li><li>Redshift</li><li>QuickSight</li></ul>
+      </div>
+      <div class="job-panel" role="tabpanel" id="panel-sandia" aria-labelledby="tab-sandia" hidden>
+        <h3>Team Member</h3>
+        <p class="meta">Sandia National Labs · via Purdue Data Mine · Aug 2023 – Apr 2024 · West Lafayette, IN</p>
+        <ul>
+          <li>Python flight prediction from truncated trajectories — pattern recognition / predictive modeling over historical flight grids.</li>
+        </ul>
+        <ul class="chips"><li>Python</li><li>scikit-learn</li><li>Predictive modeling</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <h2>Selected work</h2>
+  <div class="acc" id="projects-acc">
+    <div class="acc-item featured">
+      <button class="acc-btn" type="button" aria-expanded="true" aria-controls="proj-briefcase" id="btn-briefcase">
+        <h3>BriefCase <span class="badge">Featured</span></h3>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+      <div class="acc-panel open" id="proj-briefcase" role="region" aria-labelledby="btn-briefcase">
+        <div><div class="acc-body">
+          Fine-tuned DistilBERT / Legal-BERT on CUAD (13k+ annotated clauses) with Llama 3.1 8B chain-of-thought rationales — <strong>0.89 macro F1</strong> on 10-class contract risk classification. On-prem vLLM / PyTorch inference beat direct LLM zero-shot by ~<strong>47 macro F1 points</strong>.
+          <ul class="chips"><li>PyTorch</li><li>Transformers</li><li>vLLM</li><li>Fine-tuning</li></ul>
+        </div></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" type="button" aria-expanded="false" aria-controls="proj-movie" id="btn-movie">
+        <h3>movieSemanticSearch</h3>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+      <div class="acc-panel" id="proj-movie" role="region" aria-labelledby="btn-movie">
+        <div><div class="acc-body">
+          Personal retrieval research over <strong>public TMDB metadata</strong> (~826 feature films; Disney-family titles appear in that open catalog): describe a scene → ranked matches via local MiniLM embeddings + Flask UI. Documented failure modes; next: labeled eval, bi-encoder shortlist + cross-encoder rerank.
+          <p style="margin:0.75rem 0 0"><a href="https://github.com/ihanda25/movieSemanticSearch" target="_blank" rel="noopener">github.com/ihanda25/movieSemanticSearch</a></p>
+          <ul class="chips"><li>Python</li><li>sentence-transformers</li><li>Flask</li><li>TMDB</li></ul>
+        </div></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" type="button" aria-expanded="false" aria-controls="proj-chainge" id="btn-chainge">
+        <h3>Chainge STL</h3>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+      <div class="acc-panel" id="proj-chainge" role="region" aria-labelledby="btn-chainge">
+        <div><div class="acc-body">
+          Civic engagement platform — React / Node / Express, Gemini event summaries, Vercel. Founded as CTO.
+          <ul class="chips"><li>React</li><li>Node</li><li>Express</li><li>Gemini</li></ul>
+        </div></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" type="button" aria-expanded="false" aria-controls="proj-mm" id="btn-mm">
+        <h3>Multimodal study support</h3>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+      <div class="acc-panel" id="proj-mm" role="region" aria-labelledby="btn-mm">
+        <div><div class="acc-body">
+          Undergrad research (Prof. Sooyeon Jeong): vision-language model of student engagement from video, gaze, and pose.
+          <ul class="chips"><li>Vision-language</li><li>Research</li></ul>
+        </div></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" type="button" aria-expanded="false" aria-controls="proj-shell" id="btn-shell">
+        <h3>Linux shell</h3>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+      <div class="acc-panel" id="proj-shell" role="region" aria-labelledby="btn-shell">
+        <div><div class="acc-body">
+          Unix-compatible shell in C — subshells, redirection, job control, process management.
+          <ul class="chips"><li>C</li><li>POSIX</li><li>Systems</li></ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <h2>Skills</h2>
+  <dl class="skills">
+    <dt>Languages</dt><dd>Python, Java, C++, C, TypeScript / JavaScript, SQL</dd>
+    <dt>AI / ML</dt><dd>Agentic / multi-agent systems, MCP, PydanticAI, Bedrock / Gemini / Claude, fine-tuning, PyTorch, vLLM, NLP, eval harnesses</dd>
+    <dt>Backend</dt><dd>REST, event-driven design, Node / Express, React, auth, schema design</dd>
+    <dt>Cloud</dt><dd>AWS (Lambda, DynamoDB, S3, EventBridge, SQS, Cognito, CloudFormation, Textract, Redshift, QuickSight), Azure, Docker, Kubernetes, Terraform, GitLab CI</dd>
+  </dl>
+</section>
+
+<section id="contact" class="wrap">
+  <h2>Contact</h2>
+  <div class="prose">
+    <p>
+      <a href="mailto:ishaanhanda25@gmail.com">ishaanhanda25@gmail.com</a><br />
+      <a href="https://linkedin.com/in/ishaan-handa" target="_blank" rel="noopener">linkedin.com/in/ishaan-handa</a><br />
+      <a href="https://github.com/ihanda25" target="_blank" rel="noopener">github.com/ihanda25</a>
+    </p>
+  </div>
+</section>
+</main>
+
+<footer class="wrap"><p>© 2026 Ishaan Handa</p></footer>
+
+<script>
+(function () {
+  const bar = document.getElementById('topbar');
+  const onScroll = () => bar.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const menuBtn = document.getElementById('menu-btn');
+  const nav = document.getElementById('nav-links');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Job tabs — only one panel visible
+  const tabs = [...document.querySelectorAll('.job-tab')];
+  const panels = [...document.querySelectorAll('.job-panel')];
+  function selectTab(tab) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach(p => {
+      const on = p.id === tab.dataset.panel;
+      p.classList.toggle('active', on);
+      if (on) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
+    });
+  }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(tab);
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        const n = tabs[(i + 1) % tabs.length];
+        selectTab(n); n.focus();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        tabs[(i - 1 + tabs.length) % tabs.length].focus();
+        selectTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+      }
+    });
+  });
+  selectTab(tabs[0]);
+
+  // Project accordion — independent toggles; BriefCase starts open
+  document.querySelectorAll('.acc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      panel.classList.toggle('open', !open);
+    });
+  });
+})();
+</script>
+</body>
+</html>
